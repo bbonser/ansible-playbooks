@@ -1,0 +1,10 @@
+- name: install core packages
+  hosts: "{{ hosts }}"
+  become: yes
+  tasks:
+  - name: install core packages
+    apt:
+      name:
+        - prometheus-node-exporter
+        - prometheus-cadvisor
+      update_cache: yes
