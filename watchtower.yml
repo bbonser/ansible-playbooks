@@ -1,0 +1,20 @@
+---
+- name: Install Watchtower Docker container
+  hosts: your_target_host  # Replace with the target host or group where you want to install Watchtower
+  become: true
+
+  tasks:
+    - name: Pull Watchtower Docker image
+      docker_image:
+        name: containrrr/watchtower
+        state: present
+
+    - name: Run Watchtower container
+      docker_container:
+        name: watchtower
+        image: containrrr/watchtower
+        restart_policy: unless-stopped
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+        command: --cleanup --interval 30  # Adjust the interval as needed
+        state: started
