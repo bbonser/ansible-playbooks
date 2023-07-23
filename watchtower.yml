@@ -1,6 +1,6 @@
 ---
 - name: Install Watchtower Docker container
-  hosts: your_target_host  # Replace with the target host or group where you want to install Watchtower
+  hosts: new  # Replace with the target host or group where you want to install Watchtower
   become: true
 
   tasks:
