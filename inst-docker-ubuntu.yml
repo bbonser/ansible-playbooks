@@ -1,6 +1,6 @@
 ---
 - name: install docker
-  hosts: "{{ hosts }}"
+  hosts: "192.168.1.20"
   become: yes
   tasks:
     - name: install docker dependencies
