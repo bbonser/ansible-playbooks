@@ -1,6 +1,6 @@
 ---
 - name: Update NVIDIA Graphics Card Driver
-  hosts: 192.168.1.70   # Replace with the name of the host where you want to update the driver.
+  hosts: pc   # Replace with the name of the host where you want to update the driver.
   gather_facts: false       # Set to false as we don't need facts for this task.
 
   tasks:
