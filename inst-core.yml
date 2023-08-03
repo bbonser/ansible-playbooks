@@ -1,5 +1,5 @@
 - name: install core packages
-  hosts: "host1"
+  hosts: "host"
   become: yes
   tasks:
     - name: install core packages
