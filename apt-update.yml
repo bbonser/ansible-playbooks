@@ -1,4 +1,4 @@
-- hosts: "*"
+- hosts: "homelab"
   become: yes
   tasks:
     - name: apt

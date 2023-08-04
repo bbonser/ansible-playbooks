@@ -1,6 +1,6 @@
 ---
 - name: Install Watchtower Docker container
-  hosts: host1  
+  hosts: "host"  
   become: true
 
   tasks:

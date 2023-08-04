@@ -1,4 +1,4 @@
-- hosts: "*"
+- hosts: "homelab"
   become: yes
   become_user: root
   tasks:
