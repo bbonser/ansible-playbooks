@@ -1,5 +1,5 @@
 ---
-- name: Install Watchtower Docker container
+- name: Deploy Watchtower Docker container
   hosts: "host"  
   become: true
 
