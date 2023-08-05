@@ -8,9 +8,15 @@
       apt:
         update_cache: yes
 
-    - name: Install Python and pip
+    - name: Install Python
       apt:
-        name: python python-pip
+        name: python
+        state: present
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Install pip for Python 2
+      apt:
+        name: python-pip
         state: present
       when: ansible_distribution == 'Ubuntu'
 
