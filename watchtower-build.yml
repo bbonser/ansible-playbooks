@@ -1,0 +1,9 @@
+---
+- name: Build Watchtower Docker container
+  hosts: "host"  
+  become: true
+
+  tasks:
+    - name: Pull Watchtower Docker image
+      docker_image:
+        name: containrrr/watchtower
