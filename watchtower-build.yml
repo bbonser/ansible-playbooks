@@ -7,3 +7,7 @@
     - name: Pull Watchtower Docker image
       docker_image:
         name: containrrr/watchtower
+        source: build
+        build:
+          path: /
+        force: yes
