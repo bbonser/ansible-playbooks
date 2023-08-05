@@ -2,7 +2,22 @@
 - name: Install pip
   hosts: "homelab"
   become: true
-  package:
-    name: python-pip
-    update_cache: true
-    state: present
+  tasks:
+    - name: Update apt cache (for Debian/Ubuntu)
+      apt:
+        update_cache: yes
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: Install pip for Python 3
+      raw: sudo apt-get install -y python3-pip
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: Install pip for Python 3
+      yum:
+        name: python3-pip
+        state: present
+      when: ansible_pkg_mgr == 'yum'
+
+    - name: Print message
+      debug:
+        msg: "pip installed successfully"
