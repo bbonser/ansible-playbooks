@@ -4,10 +4,11 @@
   become: true
 
   tasks:
-    - name: Pull Watchtower Docker image
+    - name: Build Watchtower Docker container
       docker_image:
         name: containrrr/watchtower
+        tag: latest
         source: build
         build:
-          path: /
-        force: yes
+          path: /opt/docker/watchtower
+      register: docker_build_result
