@@ -1,6 +1,8 @@
 ---
 - name: Create watchtower container
   hosts: homelab
+  become: yes
+  tasks:
   community.docker.docker_container:
     name: watchtower
     image: containrrr/watchtower
