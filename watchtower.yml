@@ -8,6 +8,7 @@
       docker_image:
         name: containrrr/watchtower
         state: present
+        source: build
 
     - name: Run Watchtower container
       docker_container:
