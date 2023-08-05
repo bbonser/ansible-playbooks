@@ -4,11 +4,25 @@
   become: true
 
   tasks:
+
+    - name: Install required packages
+      apt:
+        name: [python-pip]
+        state: present
+
+    - name: Install Docker SDK for Python
+      pip:
+        name: docker
+
     - name: Build Watchtower Docker container
       docker_image:
         name: containrrr/watchtower
         tag: latest
         source: build
         build:
-          path: /opt/docker/watchtower
+          path: /path/to/watchtower/dockerfile/directory
       register: docker_build_result
+
+    - name: Print build result
+      debug:
+        var: docker_build_result
