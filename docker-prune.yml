@@ -1,9 +1,6 @@
 ---
 - name: Install Ansible Galaxy dependencies
-      ansible.builtin.pip:
         name: community.docker.docker_prune
-        state: present
-      tags: semaphore
 
 - name: docker prune (not containers)
   hosts: "homelab"
