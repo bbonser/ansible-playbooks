@@ -1,8 +1,0 @@
----
-name: docker prune (not containers)
-hosts: "homelab"
-become: yes
-  community.docker.docker_prune:
-    images: true
-    networks: true
-    volumes: true
