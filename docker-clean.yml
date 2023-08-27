@@ -1,13 +1,8 @@
 ---
-- name: clean docker
-  hosts: "homelab"
-  tasks:
-    - name: prune non-dangling images
-      community.docker.docker_prune:
-        containers: false
-        images: true
-        images_filters:
-          dangling: false
-        networks: false
-        volumes: false
-        builder_cache: false
+name: docker prune (not containers)
+hosts: "homelab"
+become: yes
+  community.docker.docker_prune:
+    images: true
+    networks: true
+    volumes: true

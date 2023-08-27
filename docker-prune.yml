@@ -1,9 +1,8 @@
 ---
-- name: Prune unused Docker images and volumes
-  hosts: homelab
-  become: yes
-  tasks:
-    - name: Prune unused images and volumes
-      docker_prune:
-        images: yes
-        volumes: yes
+name: docker prune (not containers)
+hosts: "homelab"
+become: yes
+  community.docker.docker_prune:
+    images: true
+    networks: true
+    volumes: true
