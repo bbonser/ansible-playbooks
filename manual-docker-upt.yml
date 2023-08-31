@@ -4,13 +4,9 @@
   become: 'yes'
   vars:
     apps:
-      - redis
-      - ghcr.io/goauthentik/server
-      - ghcr.io/goauthentik/proxy
-      - postgres            
-      - portainer/portainer-ce     
-      - jc21/nginx-proxy-manager
-      - oznu/guacamole
+      - authentik
+      - nginx-proxy
+      - portainer
   tasks:
     - name: Pull latest images
       command: docker compose pull
