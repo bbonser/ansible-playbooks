@@ -1,7 +1,6 @@
----
 - name: Create watchtower container
   hosts: Home
-  become: yes
+  become: 'yes'
   community.docker.docker_container:
     name: watchtower
     image: containrrr/watchtower
@@ -9,6 +8,6 @@
     state: started
     restart_policy: unless-stopped
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - '/var/run/docker.sock:/var/run/docker.sock'
     env:
-      WATCHTOWER_CLEANUP: "true"
+      WATCHTOWER_CLEANUP: 'true'
