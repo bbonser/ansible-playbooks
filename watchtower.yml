@@ -2,16 +2,6 @@
   hosts: Home
   become: 'yes'
   tasks:
-    - name: Ensure pip is installed
-      apt:
-        name: python3-pip
-        state: present
-
-    - name: Ensure Docker SDK for Python is installed
-      pip:
-        name: docker
-        state: present
-
     - name: Ensure Watchtower container is running
       community.docker.docker_container:
         name: watchtower
