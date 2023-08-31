@@ -1,28 +1,17 @@
 ---
-- name: Prune Docker Volumes, Networks, and Images
-  hosts: "homelab"
+- name: Docker Prune Playbook
+  hosts: homelab
   become: yes
-
   tasks:
-    - name: Prune Docker volumes
+    - name: Prune Docker volumes, networks, and images
       community.docker.docker_prune:
-        resource: volumes
-      register: docker_volume_prune_result
+        volumes: yes
+        networks: yes
+        images: yes
+        containers: no
+        builder_cache: no
+      register: prune_result
 
-    - name: Prune Docker networks
-      community.docker.docker_prune:
-        resource: networks
-      register: docker_network_prune_result
-
-    - name: Prune Docker images
-      community.docker.docker_prune:
-        resource: images
-      register: docker_image_prune_result
-
-    - name: Display Docker prune results
+    - name: Display prune result
       debug:
-        var: item
-      loop:
-        - "{{ docker_volume_prune_result }}"
-        - "{{ docker_network_prune_result }}"
-        - "{{ docker_image_prune_result }}"
+        var: prune_result
