@@ -1,15 +1,17 @@
 ---
-- name: Create watchtower container
+- name: Deploy Watchtower Docker Container
   hosts: homelab
   become: yes
   tasks:
+    - name: Ensure docker is installed
+      apt:
+        name: docker.io
+        state: present
 
-    name: watchtower
-    image: containrrr/watchtower
-    pull: true
-    state: started
-    restart_policy: unless-stopped
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    env:
-      WATCHTOWER_CLEANUP: "true"
+    - name: Ensure Watchtower container is running
+      docker_container:
+        name: watchtower
+        image: containrrr/watchtower
+        state: started
+        restart_policy: always
+        detach: true
