@@ -1,20 +1,21 @@
 ---
-- name: check disk space
-  hosts: "homelab"
+- name: Check Disk Space on Ubuntu
+  hosts: homelab
+  become: yes
   tasks:
-    - name: get disk usage
-      command: df -h
-      register: disk_usage
-    - name: check disk space available
-      shell: df -h / | awk 'NR==2 {print $5}'
-      register: disk_usage
-    # - name: send discord message when disk space is over 80%
-    #   uri:
-    #     url: "your-webhook"
-    #     method: POST
-    #     body_format: json
-    #     body: '{"content": "Disk space on {{ inventory_hostname }} is above 80%!"}'
-    #     headers:
-    #       Content-Type: application/json
-    #     status_code: 204
-    #   when: disk_usage.stdout[:-1]|int > 80
+    - name: Check disk space
+      shell: df -h
+      register: disk_space
+
+    - name: Display disk space
+      debug:
+        var: disk_space.stdout_lines
+
+    - name: Check if any partition is over 80% full
+      shell: df --output=pcent | grep -v Use% | awk '{gsub("%",""); print $1}' | awk '$1 >= 80'
+      register: over_80
+
+    - name: Display warning if any partition is over 80% full
+      debug:
+        msg: "Warning: Some partitions are over 80% full."
+      when: over_80.stdout
