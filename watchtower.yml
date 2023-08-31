@@ -1,6 +1,6 @@
 ---
 - name: Deploy Watchtower Docker Container
-  hosts: homelab
+  hosts: watchtower
   become: yes
   tasks:
     - name: Ensure docker is installed
