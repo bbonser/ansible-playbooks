@@ -1,0 +1,28 @@
+---
+- name: Update Docker Compose Files
+  hosts: CT1
+  become: 'yes'
+  vars:
+    apps:
+      - redis
+      - ghcr.io/goauthentik/server
+      - ghcr.io/goauthentik/proxy
+      - postgres            
+      - portainer/portainer-ce     
+      - jc21/nginx-proxy-manager
+      - oznu/guacamole
+  tasks:
+    - name: Pull latest images
+      command: docker compose pull
+      args:
+        chdir: "/opt/docker/{{ item }}"
+      with_items: "{{ apps }}"
+      
+    - name: Recreate containers
+      command: docker compose up -d --remove-orphans
+      args:
+        chdir: "/opt/docker/{{ item }}"
+      with_items: "{{ apps }}"
+
+    - name: Prune Docker images
+      command: docker image prune
