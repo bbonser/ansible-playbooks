@@ -1,6 +1,6 @@
 ---
 - name: Deploy Watchtower Docker Container
-  hosts: watchtower
+  hosts: "{{ hosts }}"
   become: yes
   tasks:
     - name: Ensure docker is installed
