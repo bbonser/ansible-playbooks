@@ -1,0 +1,17 @@
+---
+- name: Check Memory Utilization on Ubuntu
+  hosts: homelab
+  become: yes
+  tasks:
+    - name: Check memory utilization
+      shell: free -m | awk 'NR==2{printf "%.2f", $3*100/$2 }'
+      register: memory_usage
+
+    - name: Display memory utilization
+      debug:
+        msg: "Memory Utilization: {{ memory_usage.stdout }}%"
+
+    - name: Display warning if memory utilization is over 80%
+      debug:
+        msg: "Warning: Memory utilization is over 80%."
+      when: memory_usage.stdout | float >= 80
