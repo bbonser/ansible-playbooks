@@ -1,5 +1,5 @@
 ---
-- name: Install Docker on Ubuntu
+- name: Install Docker and Docker Compose on Ubuntu
   hosts: techbybrett2
   become: yes
   tasks:
@@ -30,10 +30,22 @@
 
     - name: Install Docker
       apt:
-        name: docker.io
+        name: docker-ce
         state: present
 
     - name: Ensure Docker service is running
       systemd:
         name: docker
         state: started
+
+    # Docker Compose installation steps below
+    - name: Download Docker Compose
+      get_url:
+        url: "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)"
+        dest: /usr/local/bin/docker-compose
+        mode: '0755'
+
+    - name: Apply executable permissions to Docker Compose
+      file:
+        path: /usr/local/bin/docker-compose
+        mode: '0755'
