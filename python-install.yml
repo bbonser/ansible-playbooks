@@ -1,0 +1,20 @@
+---
+- name: Install Python, pip, and Docker SDK on Ubuntu
+  hosts: homelab
+  become: yes  # To run tasks as sudo
+  tasks:
+    - name: Update APT repository
+      apt:
+        update_cache: yes
+
+    - name: Install Python and pip
+      apt:
+        name:
+          - python3
+          - python3-pip
+        state: present
+
+    - name: Install Docker SDK using pip
+      pip:
+        name: docker
+        executable: pip3
