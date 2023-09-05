@@ -1,6 +1,6 @@
 ---
 - name: Install Docker and Docker Compose on Ubuntu
-  hosts: all
+  hosts: techbybrett2
   become: yes
   tasks:
     # Install Docker
