@@ -1,0 +1,21 @@
+---
+- name: Backup to Synology NAS
+  hosts: homelab
+  become: yes
+  vars:
+    nas_user: brett
+    nas_ip: 192.168.1.242
+    nas_base_path: /volume1/NetBackup
+  tasks:
+    - name: Determine the directory containing Docker folders
+      # This command is just an example. Replace it with your method to find the folder name.
+      command: "find /opt/docker -name '*' -type d"
+      register: folder_name_result
+      changed_when: false
+
+    - name: Set folder_name variable
+      set_fact:
+        folder_name: "{{ folder_name_result.stdout_lines[0] | basename }}"
+
+    - name: Execute backup using rsync
+      command: "rsync -av /opt/docker {{ nas_user }}@{{ nas_ip }}:{{ nas_base_path }}/{{ folder_name }}/"
