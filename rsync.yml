@@ -18,4 +18,4 @@
         folder_name: "{{ folder_name_result.stdout_lines[0] | default('default_folder_name') | basename }}"
 
     - name: Execute backup using rsync
-      command: "rsync -av /opt/docker {{ nas_user }}@{{ nas_ip }}:{{ nas_base_path }}/{{ folder_name }}/"
+      command: "rsync -avxz /opt/docker {{ nas_user }}@{{ nas_ip }}:{{ nas_base_path }}/{{ folder_name }}/"
