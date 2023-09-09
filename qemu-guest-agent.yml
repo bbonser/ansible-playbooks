@@ -1,4 +1,4 @@
-- name: intsall latest qemu-guest-agent
+- name: install latest qemu-guest-agent
   hosts:: "homelab"
   tasks:
     - name: install qemu-guest-agent
