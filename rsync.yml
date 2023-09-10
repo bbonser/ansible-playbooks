@@ -3,6 +3,11 @@
   hosts: homelab
   become: yes
   tasks:
+  - name: Ensure script has execute permissions
+      file:
+        path: /opt/docker/backup.sh
+        mode: '0755'
+
     - name: Run remote bash script with folder name based on hostname
       command:
         cmd: "/opt/docker/backup.sh {{ inventory_hostname }}"
