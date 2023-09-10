@@ -1,0 +1,9 @@
+---
+- name: Clone dockcheck repository on Ubuntu
+  hosts: all
+  become: yes  # Using 'become' to ensure we have the necessary privileges
+  tasks:
+    - name: Clone the repository into /opt/docker
+      git:
+        repo: https://github.com/mag37/dockcheck.git
+        dest: /opt/docker/dockcheck
