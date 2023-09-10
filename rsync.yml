@@ -1,11 +1,11 @@
 ---
-- name: Execute backup.sh on Ubuntu VMs
+- name: Execute remote bash script on Ubuntu VMs
   hosts: homelab
-  become: yes 
+  become: yes
   tasks:
-    - name: Run remote bash script
+    - name: Run remote bash script with folder name based on hostname
       command:
-        cmd: /opt/docker/backup.sh
+        cmd: "/opt/docker/backup.sh {{ inventory_hostname }}"
       register: script_output
 
     - name: Display script output
