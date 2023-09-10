@@ -1,21 +1,13 @@
 ---
-- name: Backup to Synology NAS
+- name: Execute backup.sh on Ubuntu VMs
   hosts: homelab
-  become: yes
-  vars:
-    nas_user: brett
-    nas_ip: 192.168.1.242
-    nas_base_path: /volume1/NetBackup
+  become: yes 
   tasks:
-    - name: Determine the directory containing Docker folders
-      # This command is just an example. Replace it with your method to find the folder name.
-      command: "find /opt/docker -name '*' -type d"
-      register: folder_name_result
-      changed_when: false
+    - name: Run remote bash script
+      command:
+        cmd: /opt/docker/backup.sh
+      register: script_output
 
-    - name: Set folder_name variable
-      set_fact:
-        folder_name: "{{ folder_name_result.stdout_lines[0] | default('default_folder_name') | basename }}"
-
-    - name: Execute backup using rsync
-      command: "rsync -avxz /opt/docker {{ nas_user }}@{{ nas_ip }}:{{ nas_base_path }}/{{ folder_name }}/"
+    - name: Display script output
+      debug:
+        msg: "{{ script_output.stdout }}"
