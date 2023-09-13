@@ -1,10 +1,9 @@
 - name: install core packages
-  hosts: "host"
+  hosts: "homelab"
   become: yes
   tasks:
     - name: install core packages
       apt:
         name:
           - prometheus-node-exporter
-          - prometheus-cadvisor
         update_cache: yes
