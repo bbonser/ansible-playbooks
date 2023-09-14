@@ -1,6 +1,6 @@
 ---
 - name: Deploy Dozzle in Docker Container using Docker Compose
-  hosts: Home
+  hosts: homelab
   become: yes
   tasks:
     - name: Create directory for Dozzle's docker-compose.yml
