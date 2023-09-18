@@ -1,9 +1,37 @@
-- name: install core packages
-  hosts: "homelab"
+---
+- name: Install Core Packages on Ubuntu VM
+  hosts: tbdev
   become: yes
   tasks:
-    - name: install core packages
+    # Update the apt cache
+    - name: Update APT cache
+      apt:
+        update_cache: yes
+
+    # Install Prometheus node exporter
+    - name: Install Prometheus node exporter
       apt:
         name:
           - prometheus-node-exporter
-        update_cache: yes
+        state: present
+
+    # Install Python and PIP
+    - name: Install Python and PIP
+      apt:
+        name:
+          - python3
+          - python3-pip
+        state: present
+
+    # Install Docker SDK for Python
+    - name: Install Docker SDK for Python
+      pip:
+        name: docker
+        executable: pip3
+
+    # Deploy Watchtower Docker container
+    - name: Deploy Watchtower Docker container
+      docker_container:
+        name: watchtower
+        image: containrrr/watchtower
+        restart_policy: always
