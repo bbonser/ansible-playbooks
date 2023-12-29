@@ -1,11 +1,12 @@
 ---
 - name: Execute remote bash script on Ubuntu VMs
-  hosts: homelab
-  become: yes
+  hosts: Home
+  become: true
   tasks:
     - name: Run remote bash script with folder name based on hostname
-      command:
-        cmd: "/opt/backup.sh {{ inventory_hostname }}"
+      shell: ./backup.sh {{ inventory_hostname }}
+      args:
+        chdir: /opt
       register: script_output
 
     - name: Display script output
