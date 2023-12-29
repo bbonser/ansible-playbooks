@@ -5,9 +5,13 @@
   tasks:
     - name: Check for updates using dockcheck
       command: ./dockcheck -n
+      args:
+        chdir: /opt/docker/dockcheck
       register: dockcheck_output
       changed_when: false
 
     - name: Update and prune if updates are available
       command: ./dockcheck -a -p
+      args:
+        chdir: /opt/docker/dockcheck
       when: "'Updates are available' in dockcheck_output.stdout"
