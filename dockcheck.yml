@@ -1,10 +1,12 @@
 ---
 - name: dockcheck
   hosts: homelab
-  become: yes
+  become: true
   tasks:
     - name: Navigate to /opt/docker/dockcheck
-      shell: cd /opt/docker/dockcheck
+      shell: "navigate to /opt/docker/dockcheck"
+        args:
+          command: cd /opt/docker/dockcheck
 
     - name: Check for updates using dockcheck
       command: ./dockcheck.sh -n
