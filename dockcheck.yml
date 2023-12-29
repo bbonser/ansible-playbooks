@@ -4,9 +4,6 @@
   tasks:
     - name: Navigate to /opt/docker/dockcheck
       command: cd /opt/docker/dockcheck
-      register: cd_result
-      failed_when: cd_result.rc != 0
-      changed_when: false
 
     - name: Check for updates using dockcheck
       command: ./dockcheck.sh -n
