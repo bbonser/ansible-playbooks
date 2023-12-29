@@ -1,6 +1,7 @@
 ---
 - name: dockcheck
   hosts: homelab
+  become: yes
   tasks:
     - name: Navigate to /opt/docker/dockcheck
       command: cd /opt/docker/dockcheck
