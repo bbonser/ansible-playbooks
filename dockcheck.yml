@@ -4,7 +4,7 @@
   become: yes
   tasks:
     - name: Navigate to /opt/docker/dockcheck
-      command: cd /opt/docker/dockcheck
+      shell: cd /opt/docker/dockcheck
 
     - name: Check for updates using dockcheck
       command: ./dockcheck.sh -n
