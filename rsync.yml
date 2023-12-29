@@ -1,6 +1,6 @@
 ---
 - name: Execute remote bash script on Ubuntu VMs
-  hosts: Home
+  hosts: homelab
   become: true
   tasks:
     - name: Run remote bash script with folder name based on hostname
