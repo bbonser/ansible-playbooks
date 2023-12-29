@@ -4,14 +4,15 @@
   become: true
   tasks:
     - name: Check for updates using dockcheck
-      command: sh /opt/docker/dockcheck/dockcheck.sh -n
+      shell: ./dockcheck.sh -n
       args:
         chdir: /opt/docker/dockcheck
       register: dockcheck_output
       changed_when: false
+      ignore_errors: true
 
     - name: Update and prune if updates are available
-      command: sh /opt/docker/dockcheck/dockcheck.sh -a -p
+      shell: ./dockcheck.sh -a -p
       args:
         chdir: /opt/docker/dockcheck
       when: "'Updates are available' in dockcheck_output.stdout"
