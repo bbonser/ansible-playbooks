@@ -3,16 +3,15 @@
   hosts: homelab
   become: true
   tasks:
-    - name: Navigate to /opt/docker/dockcheck
-      shell: "navigate to /opt/docker/dockcheck"
-        args:
-          command: cd /opt/docker/dockcheck
-
     - name: Check for updates using dockcheck
-      command: ./dockcheck.sh -n
+      command: sh /opt/docker/dockcheck/dockcheck.sh -n
+      args:
+        chdir: /opt/docker/dockcheck
       register: dockcheck_output
       changed_when: false
 
     - name: Update and prune if updates are available
-      command: ./dockcheck.sh -a -p
+      command: sh /opt/docker/dockcheck/dockcheck.sh -a -p
+      args:
+        chdir: /opt/docker/dockcheck
       when: "'Updates are available' in dockcheck_output.stdout"
