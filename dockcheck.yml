@@ -1,0 +1,13 @@
+---
+- name: dockcheck
+  hosts: "manual_update"
+  become: yes
+  tasks:
+    - name: Check for updates using dockcheck
+      command: ./dockcheck -n
+      register: dockcheck_output
+      changed_when: false
+
+    - name: Update and prune if updates are available
+      command: ./dockcheck -a -p
+      when: "'Updates are available' in dockcheck_output.stdout"
