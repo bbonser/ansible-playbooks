@@ -9,10 +9,10 @@
       changed_when: false
 
     - name: Check for updates using dockcheck
-      command: ./dockcheck -n
+      command: ./dockcheck.sh -n
       register: dockcheck_output
       changed_when: false
 
     - name: Update and prune if updates are available
-      command: ./dockcheck -a -p
+      command: ./dockcheck.sh -a -p
       when: "'Updates are available' in dockcheck_output.stdout"
