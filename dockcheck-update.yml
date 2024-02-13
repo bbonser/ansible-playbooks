@@ -1,0 +1,11 @@
+---
+- name: dockcheck-update
+  hosts: homelab
+  become: true
+  tasks:
+    - name: git pull
+      git:
+        repo: https://github.com/mag37/dockcheck.git
+        dest: /opt/docker/dockcheck
+        update: yes
+        version: main
