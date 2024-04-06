@@ -1,0 +1,11 @@
+- hosts: homelab
+  become: yes
+  tasks:
+
+    - name: Run the script
+      command: /opt/scripts/prune.sh
+      register: script_output
+
+    - name: Display script output
+      debug:
+        var: script_output.stdout
