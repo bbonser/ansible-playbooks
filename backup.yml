@@ -1,0 +1,25 @@
+---
+- hosts: all
+  vars:
+    nas_backup_dir: "/volume1/NetBackup/{{ inventory_hostname }}_opt_docker_backup"
+  tasks:
+
+    - name: Backup /opt/docker directory to Synology NAS
+      ansible.builtin.synchronize:
+        src: /opt/docker/
+        dest: "{{ nas_backup_dir }}"
+        mode: push
+        delete: yes
+        recursive: yes
+        owner: yes
+        group: yes
+        rsync_opts:
+          - "--compress"
+          - "--archive"
+          - "--verbose"
+          - "--human-readable"
+          - "--progress"
+      vars:
+        ansible_ssh_private_key_file: /volume1/.ssh/authorized_keys
+        ansible_ssh_user: "your_synology_nas_username"
+        ansible_ssh_host: "your_synology_nas_ip_address"

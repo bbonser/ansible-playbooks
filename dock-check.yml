@@ -1,6 +1,6 @@
 ---
 - name: Clone dockcheck repository on Ubuntu
-  hosts: tbdev
+  hosts: runner1
   become: yes  # Using 'become' to ensure we have the necessary privileges
   tasks:
     - name: Clone the repository into /opt/docker
